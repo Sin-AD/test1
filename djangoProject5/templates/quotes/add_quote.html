@@ -1,0 +1,42 @@
+{% extends "quotes/base.html" %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h2>Добавить цитату</h2>
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+          {{ form.text.label_tag }} {{ form.text }}
+          {% for err in form.text.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.source.label_tag }} {{ form.source }}
+          <div class="form-text">Или введите новый источник ниже</div>
+          {% for err in form.source.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.new_source_name.label_tag }} {{ form.new_source_name }}
+          {% for err in form.new_source_name.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.new_source_type.label_tag }} {{ form.new_source_type }}
+        </div>
+
+        <div class="mb-3">
+          {{ form.weight.label_tag }} {{ form.weight }}
+          {% for err in form.weight.errors %}<div class="text-danger small">{{ err }}</div>{% endfor %}
+        </div>
+
+        {% if form.non_field_errors %}
+          <div class="alert alert-danger">{% for e in form.non_field_errors %}{{ e }}<br>{% endfor %}</div>
+        {% endif %}
+
+        <button class="btn btn-primary">Добавить</button>
+        <a class="btn btn-secondary" href="{% url 'quotes:index' %}">Отмена</a>
+      </form>
+    </div>
+  </div>
+{% endblock %}

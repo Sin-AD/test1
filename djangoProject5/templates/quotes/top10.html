@@ -1,0 +1,20 @@
+{% extends "quotes/base.html" %}
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <h2>Топ-10 цитат (по лайкам)</h2>
+      {% if top %}
+        <div class="list-group">
+          {% for q in top %}
+            <div class="list-group-item mb-2">
+              <p class="mb-1">“{{ q.text }}”</p>
+              <small class="text-muted">Источник: {{ q.source.name }} ({{ q.source.get_type_display }}) • Лайков: {{ q.likes }} • Дизлайков: {{ q.dislikes }} • Просмотров: {{ q.views }}</small>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="alert alert-info">Пока нет цитат.</div>
+      {% endif %}
+    </div>
+  </div>
+{% endblock %}

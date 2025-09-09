@@ -1,0 +1,21 @@
+<div class="card quote-card mb-3">
+  <div class="card-body">
+    <p class="card-text fs-5">“{{ quote.text }}”</p>
+    <p class="mb-1"><strong>Источник:</strong> {{ quote.source.name }} ({{ quote.source.get_type_display }})</p>
+    <p class="mb-1"><strong>Вес:</strong> {{ quote.weight }} • <strong>Просмотры:</strong> {{ quote.views }}</p>
+
+    <form style="display:inline;">
+      {% csrf_token %}
+      <button type="button" class="btn btn-success btn-sm me-2" onclick="sendVote({{ quote.pk }}, 'like')">
+        👍 <span id="likes-count">{{ quote.likes }}</span>
+      </button>
+    </form>
+
+    <form style="display:inline;">
+      {% csrf_token %}
+      <button type="button" class="btn btn-danger btn-sm" onclick="sendVote({{ quote.pk }}, 'dislike')">
+        👎 <span id="dislikes-count">{{ quote.dislikes }}</span>
+      </button>
+    </form>
+  </div>
+</div>

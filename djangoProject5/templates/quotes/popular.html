@@ -1,0 +1,25 @@
+{% extends "quotes/base.html" %}
+
+{% block title %}Популярные цитаты{% endblock %}
+
+{% block content %}
+<h2>Топ 10 цитат</h2>
+
+<form method="get">
+    <label for="filter">Сортировать по:</label>
+    <select name="filter" id="filter" onchange="this.form.submit()">
+        <option value="likes" {% if filter_by == 'likes' %}selected{% endif %}>Лайки</option>
+        <option value="dislikes" {% if filter_by == 'dislikes' %}selected{% endif %}>Дизлайки</option>
+        <option value="views" {% if filter_by == 'views' %}selected{% endif %}>Просмотры</option>
+    </select>
+</form>
+
+<ul>
+{% for quote in quotes %}
+    <li>
+        "{{ quote.text }}" — <em>{{ quote.source.name }}</em>
+        (Лайки: {{ quote.likes }}, Дизлайки: {{ quote.dislikes }}, Просмотры: {{ quote.views }})
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}
